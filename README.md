@@ -2,6 +2,6 @@
 
 Sentiment analysis of social media data on Emirates NBD facebook page.
 
-* [Code](https://github.com/romiebanerjee/Social-Analytics/blob/master/code.py)
+* [View Code](https://github.com/romiebanerjee/Social-Analytics/blob/master/code.py)
 
-* [Notebook Presentation](https://romiebanerjee.github.io/ENBD_facebook_sentiment_analysis.html)
+* [View Notebook](https://romiebanerjee.github.io/ENBD_facebook_sentiment_analysis.html)
