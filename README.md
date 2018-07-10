@@ -10,5 +10,5 @@
 
 * [View Code](https://github.com/romiebanerjee/Social-Analytics/blob/master/twitter_code.py)
 
-* [View Notebook](https://github.com/romiebanerjee/romiebanerjee.github.io/blob/master/twitter_analytics.html)
+* [View Notebook](https://romiebanerjee.github.io/twitter_analytics.html)
 
