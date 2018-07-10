@@ -64,9 +64,18 @@ posts["Clean Text"] = posts["Text"].map(clean)
 comments["Clean Text"] = comments["Text"].map(clean)
 
 
-# In[20]:
+# In[8]:
+
+#remove rows with empty string posts/comments
+empty_rows_indices = comments[comments["Clean Text"] == ""].index.tolist()
+comments = comments.drop(empty_rows_indices)
+
+
+# In[9]:
 
 # The textblob library consists of a pretrained Naive Bayes Analyser
+# subjectivity range = [0,1], polarity range = [-1,1]
+
 polarity = lambda x : tb(x).sentiment.polarity
 subjectivity = lambda x : tb(x).sentiment.subjectivity
 
@@ -75,7 +84,7 @@ comments["subjectivity"] = comments["Clean Text"].map(subjectivity)
 comments["sentiment_index"] = list(zip(comments.subjectivity.values, comments.polarity.values))
 
 
-# In[9]:
+# In[10]:
 
 # Plot sentiment indices along time
 x = comments[["polarity", "subjectivity"]]
@@ -87,7 +96,7 @@ plt.ylabel("moving avererage")
 plt.show()
 
 
-# In[10]:
+# In[11]:
 
 #Define sentiment using sentiment indices computed above
 def sentiment(index):
@@ -100,7 +109,7 @@ def sentiment(index):
 comments["sentiment"] = comments["sentiment_index"].map(sentiment)
 
 
-# In[11]:
+# In[12]:
 
 # See how sentiments are distributed
 sns.countplot(comments['sentiment'],label="Count")
@@ -108,7 +117,7 @@ plt.title("Total sentiments distribution")
 plt.show()
 
 
-# In[12]:
+# In[13]:
 
 # Distribution of sentiments across years
 to_year = lambda x : x.strftime('%Y')
@@ -117,7 +126,7 @@ comments["year"] = comments["date"].map(to_year)
 years = ['2015','2016','2017','2018']
 dictio = {}
 
-for sent in ['Positive','Negetive','Neutral']:
+for sent in ['Neutral','Positive','Negetive']:
     dictio[sent] = [len(comments["sentiment"][comments["sentiment"] == sent]
                          [comments["year"] == year]) for year in years]
 
@@ -126,7 +135,7 @@ df.plot(kind = 'bar')
 plt.show()
 
 
-# In[13]:
+# In[14]:
 
 # Pie chart of sentiments distribution across years
 labels = 'Negetive', 'Neutral', 'Positive'
@@ -145,7 +154,7 @@ for year in years:
 plt.show()
 
 
-# In[14]:
+# In[15]:
 
 # Week-wise distribution of sentiments
 
@@ -162,7 +171,7 @@ for sentiment in ["Positive", "Negetive","Neutral"]:
 frame = pd.DataFrame(dict_data, index = index[1:].strftime('%Y-%m-%d'))
 
 
-# In[15]:
+# In[16]:
 
 fig1 = plt.figure()
 frame.plot(figsize = (20,7), kind = "bar", stacked = "True")
@@ -170,7 +179,7 @@ plt.title("Sentiment trends / weekly data")
 plt.show()
 
 
-# In[16]:
+# In[17]:
 
 # Same plot - continous
 frame.plot(figsize = (20,7))
@@ -178,14 +187,14 @@ plt.title("Sentiment trends")
 plt.show()
 
 
-# In[17]:
+# In[18]:
 
 # Collect words and phrases occurring in high sentiment comments
 from wordcloud import WordCloud, STOPWORDS
 stopwords = set(STOPWORDS)
 
 
-# In[18]:
+# In[21]:
 
 # Words and phrases occuring in positive sentiment comments
 positive_sentiment_words = " ".join(comments["Clean Text"][comments["sentiment"] == "Positive"].values.tolist())
@@ -205,7 +214,7 @@ plt.axis("off")
 plt.show()
 
 
-# In[19]:
+# In[20]:
 
 # Words and phrases occurring in negetive sentiment comments
 negetive_sentiment_words = " ".join(comments["Clean Text"][comments["sentiment"] == "Negetive"].values.tolist())
@@ -223,4 +232,9 @@ plt.imshow(wordcloud)
 plt.title("Words associated with Negetive sentiments")
 plt.axis("off")
 plt.show()
+
+
+# In[ ]:
+
+
 
