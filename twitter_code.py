@@ -15,11 +15,11 @@ import re
 # In[2]:
 
 # register for Twitter API
-consumer_key = 'rrRcx9wOePovLRPgt38lHMbrt'
-consumer_secret = 'K0mUuJY91RZMN4CDeTKnSBOTma6wbiSkCgrnMISCobrUWXvUYo'
+consumer_key = ""
+consumer_secret = ""
 
-access_token = '924790956154597377-UYAoe05QgIDAft2Y4r0He1wX1qeaIMS'
-access_token_secret = 'neFsA0vzOjnzW6krjhS3Dq23tlwCxPCkhlDDDxJcgJ7uU'
+access_token = ""
+access_token_secret = ""
 
 
 # In[3]:
